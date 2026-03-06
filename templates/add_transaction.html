@@ -1,0 +1,88 @@
++{% extends "index.html" %}
+ {% load static %}
+  {% block title %} add transaction {% endblock title %} 
+  {% block css %}  <link rel="stylesheet" href="{% static "style/add_transaction.css" %}">  {% endblock css %}
+{% block body %}
+
+
+<div class="container mt-5 d-flex justify-content-center">
+  <div
+    class="card shadow p-4"
+    style="width: 100%; max-width: 800px; border-radius: 12px"
+  >
+    <h3 class="mb-4 text-center">Add Transaction</h3>
+
+    <form method="POST">
+      {% csrf_token %}
+       
+
+      <div class="row">
+        <div class="col-md-6 mb-3 ">
+         {{ form.date.label_tag }} {{ form.date }} 
+          <div class="text-danger small ">{{ form.date.errors }}</div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          {{ form.type.label_tag }} {{ form.type }}
+          <div class="text-danger small">{{ form.type.errors }}</div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          {{ form.title.label_tag }} {{ form.title }}
+          <div class="text-danger small">{{ form.title.errors }}</div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          {{ form.category.label_tag }} {{ form.category }}
+          <div class="text-danger small">{{ form.category.errors }}</div>
+        </div>
+
+        <div class="col-12 mb-4">
+          {{ form.amount.label_tag }} {{ form.amount }}
+          <div class="text-danger small">{{ form.amount.errors }}</div>
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit"  class="btn btn-primary">Save Transaction</button>
+        
+      </div>
+      
+    </form>
+  </div>
+</div>
+
+<div class="toast-container position-fixed top-0 end-0 p-3">
+
+{% if messages %}
+{% for message in messages %}
+
+<div class="toast align-items-center text-white 
+{% if message.tags == 'success' %} bg-success
+{% elif message.tags == 'error' %} bg-danger
+{% elif message.tags == 'warning' %} bg-warning
+{% endif %}
+border-0 mb-2" role="alert">
+
+<div class="d-flex">
+<div class="toast-body">
+{{ message }}
+</div>
+
+<button type="button" class="btn-close btn-close-white me-2 m-auto"
+data-bs-dismiss="toast"></button>
+
+</div>
+</div>
+
+{% endfor %}
+{% endif %}
+
+</div>
+
+
+
+
+{% block js %}  <script src="{% static "script/add.js" %}"></script> {% endblock js %}
+
+{% endblock body %}

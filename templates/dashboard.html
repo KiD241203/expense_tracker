@@ -1,0 +1,150 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title  %} dashboard {% endblock title  %}
+{% block css %}  <link rel="stylesheet" href="{% static "style/dashboard.css" %}">  {% endblock css %}
+
+{% block body %}
+
+
+
+<section class='mt-2' >
+<div class="container">    
+  
+        <div class="d-flex justify-content-between align-items-center mb-2 mt-4 ">
+
+            <h3>Welcome, {{ user.username }}</h3>
+        
+            <a href=" {% url "add_transaction" %}"> <button class='btn btn-primary'> + Add transaction</button> </a>
+        </div>  
+        
+           <div class="row">
+            <div class="col-12 col-sm-12  col-lg-4 mb-3">
+                <div class="card income">
+                        <div class="card-body">
+                            <h5 class="card-title ">INCOME</h5>
+                            
+                            <p class="card-text text-white pt-3">₹ {{ income }}</p>
+                           
+                        </div>
+                    </div>
+          </div>          
+
+                
+             <div class="col-12 col-sm-12  col-lg-4 mb-3">
+                <div class="card expense">
+                        <div class="card-body">
+                            <h5 class="card-title">EXPENSE</h5>
+                            
+                            <p class="card-text text-white pt-3">₹ {{ expense }}</p>
+                           
+                        </div>
+                    </div>
+            </div>
+
+
+
+             <div class="col-12 col-sm-12  col-lg-4 mb-3">
+                <div class="card balance">
+                        <div class="card-body">
+                            <h5 class="card-title " >BALANCE</h5>
+                            
+                            <p class="card-text text-white pt-3"> ₹ {{ balance }}</p>
+                           
+                        </div>
+                    </div>
+            </div>  
+        </div>
+
+
+            {% if recent_transaction %}
+
+        <div class="table-responsive">
+            <p>Last three  Transactions </p>
+             
+     <table class="table table-striped table-success table-responsive text-nowrap table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Title</th>
+      <th scope="col">Category</th>
+      <th scope="col">Type</th>
+      <th scope="col">Amount</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {% for recent in recent_transaction %}
+    <tr>
+        <td> {{ recent.date }} </td>
+        <td> {{ recent.title }} </td>
+        <td> {{ recent.category }} </td>
+        <td> {{ recent.type }} </td>
+        <td> {{ recent.amount }} </td>
+       
+        
+    </tr>
+    {% endfor %}
+   
+  </tbody>
+</table>
+
+
+        <div class='mt-4'>
+            <div class="text-end mt-3 mb-3">
+    <a href="{% url 'transaction_list' %}" class="text-primary view_more">
+        View more>>
+    </a>
+</div>
+
+{% else %}
+
+    <div class='d-flex flex-column align-items-center justify-content-center' style='height:50vh' >
+        <h3>--- No Transactions Yet ---</h3> 
+    </div>
+
+       {% endif %}
+
+    </div>
+
+   
+
+    </div>
+</section>
+
+<div class="toast-container position-fixed top-0 end-0">
+
+{% if messages %}
+{% for message in messages %}
+
+<div class="toast align-items-center text-white 
+{% if message.tags == 'success' %} bg-success
+{% elif message.tags == 'error' %} bg-danger
+{% elif message.tags == 'warning' %} bg-warning
+{% endif %}
+border-0 mb-2" role="alert">
+
+<div class="d-flex">
+<div class="toast-body">
+{{ message }}
+</div>
+
+<button type="button" class="btn-close btn-close-white me-2 m-auto"
+data-bs-dismiss="toast"></button>
+
+</div>
+</div>
+
+{% endfor %}
+{% endif %}
+
+</div>
+
+
+
+
+{% block js %}  <script src=" {% static "script/dash.js" %} "></script> {% endblock js %}
+
+
+{% endblock body %}
+

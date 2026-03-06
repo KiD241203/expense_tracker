@@ -1,0 +1,56 @@
+
+h3{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: black;
+}
+.card{
+    color: white;
+}
+.card.income{
+    background:  #10b981;
+   
+ 
+}
+.card.income:hover{
+ Background: #059669;
+}
+.card.expense{
+background-color: #ef4444;
+
+
+}
+.card.expense:hover{
+    background: #dc2626;
+}
+.card.balance{
+background-color: #7c3aed;
+}
+.card.balance:hover{
+    background: #6d28d9;
+}
+
+
+
+.Transaction{
+    margin-left: 50%;
+    
+}
+.view_more{
+    text-decoration: underline;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+  
+
+p{
+    color: black;
+}
+
+.alert {
+    transition: opacity 0.4s ease;
+    
+}
+.test{
+    border: 1px solid rgba(0, 0, 0, 0);
+    height: 50px;
+}
